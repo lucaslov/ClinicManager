@@ -20,6 +20,11 @@ namespace ClinicManager.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Specialization> Specializations { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Visit> Visits { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
