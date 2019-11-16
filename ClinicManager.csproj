@@ -181,6 +181,14 @@
     <Compile Include="Migrations\201911151753209_AddBasicModelsToDB.Designer.cs">
       <DependentUpon>201911151753209_AddBasicModelsToDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911161809397_PopulateSpecializations.cs" />
+    <Compile Include="Migrations\201911161809397_PopulateSpecializations.Designer.cs">
+      <DependentUpon>201911161809397_PopulateSpecializations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911161859107_AddDataAnnotationsAndEMailProp.cs" />
+    <Compile Include="Migrations\201911161859107_AddDataAnnotationsAndEMailProp.Designer.cs">
+      <DependentUpon>201911161859107_AddDataAnnotationsAndEMailProp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -272,6 +280,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911151753209_AddBasicModelsToDB.resx">
       <DependentUpon>201911151753209_AddBasicModelsToDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911161809397_PopulateSpecializations.resx">
+      <DependentUpon>201911161809397_PopulateSpecializations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911161859107_AddDataAnnotationsAndEMailProp.resx">
+      <DependentUpon>201911161859107_AddDataAnnotationsAndEMailProp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
