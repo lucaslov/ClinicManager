@@ -1,0 +1,25 @@
+﻿@model ClinicManager.Models.Patient
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Patient Details</h2>
+<ul>
+    <li>Name: @Model.FullName</li>
+    <li>Date of Birth: @Model.BirthDate.Date</li>
+    <li>Phone Number: @Model.PhoneNumber</li>
+    <li>E-mail Address: @Model.EMail</li>
+    @if (!string.IsNullOrEmpty(Model.Address))
+    {
+        <li>Address: @Model.Address</li>
+    }
+    @if (!string.IsNullOrEmpty(Model.Height))
+    {
+        <li>Address: @Model.Height</li>
+    }
+    @if (!string.IsNullOrEmpty(Model.Weight))
+    {
+        <li>Address: @Model.Weight</li>
+    }
+</ul>
+
