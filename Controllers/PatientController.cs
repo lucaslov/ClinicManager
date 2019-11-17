@@ -1,8 +1,5 @@
 ﻿using ClinicManager.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ClinicManager.Controllers
@@ -20,7 +17,7 @@ namespace ClinicManager.Controllers
         }
         public ActionResult Index()
         {
-            var patients = _context.Patients.ToList();
+            var patients = _context.Patients;
             return View(patients);
         }
         public ActionResult New()
@@ -37,6 +34,13 @@ namespace ClinicManager.Controllers
             var patient = _context.Patients.FirstOrDefault(p => p.Id == id);
             if (patient == null) return HttpNotFound();
             return View("PatientForm", patient);
+        }
+        public ActionResult Delete(int id)
+        {
+            var patient = _context.Patients.FirstOrDefault(p => p.Id == id);
+            _context.Patients.Remove(patient);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Patient");
         }
         public ActionResult Save(Patient patient)
         {

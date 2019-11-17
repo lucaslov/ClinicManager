@@ -1,0 +1,13 @@
+﻿@model ClinicManager.Models.Doctor
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<ul>
+    <li>Full Name: @Model.FullName</li>
+    <li>Phone Number: @Model.PhoneNumber</li>
+    <li>Email Address: @Model.EMail</li>
+    <li>Address: @Model.Address</li>
+    <li>Specialization: @Model.Specialization.Name</li>
+</ul>

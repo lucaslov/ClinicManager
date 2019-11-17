@@ -1,0 +1,33 @@
+﻿@model ClinicManager.ViewModels.DoctorFormViewModel
+@{
+    ViewBag.Title = "DoctorForm";
+}
+
+<h2>DoctorForm</h2>
+@using (Html.BeginForm("Save", "Doctor"))
+{
+    <div class="form-group">
+        @Html.LabelFor(d => d.Doctor.FullName)
+        @Html.TextBoxFor(d => d.Doctor.FullName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(d => d.Doctor.PhoneNumber)
+        @Html.TextBoxFor(d => d.Doctor.PhoneNumber, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(d => d.Doctor.EMail)
+        @Html.TextBoxFor(d => d.Doctor.EMail, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(d => d.Doctor.Address)
+        @Html.TextBoxFor(d => d.Doctor.Address, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(d => d.Doctor.SpecializationId)
+        @Html.DropDownListFor(d => d.Doctor.SpecializationId,
+        new SelectList(Model.Specializations, "Id", "Name"),
+        "Select Specialization", new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(d => d.Doctor.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
