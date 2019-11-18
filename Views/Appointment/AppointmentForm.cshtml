@@ -1,0 +1,29 @@
+﻿@model ClinicManager.ViewModels.AppointmentFormViewModel
+@{
+    ViewBag.Title = "AppointmentForm";
+}
+
+<h2>AppointmentForm</h2>
+@using (Html.BeginForm("Save", "Appointment"))
+{
+<div class="form-group">
+    @Html.LabelFor(a => a.Appointment.Date)
+    @Html.TextBoxFor(a => a.Appointment.Date, new { @class = "form-control"})
+</div>
+<div class="form-group">
+    @Html.LabelFor(a => a.Appointment.Description)
+    @Html.TextBoxFor(a => a.Appointment.Description, new { @class = "form-control" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(a => a.Appointment.DoctorId)
+    @Html.DropDownListFor(a => a.Appointment.DoctorId, 
+    new SelectList(Model.Doctors, "Id", "FullName"), "Select Doctor", new { @class = "form-control" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(a => a.Appointment.PatientId)
+    @Html.DropDownListFor(a => a.Appointment.PatientId,
+    new SelectList(Model.Patients, "Id", "FullName"), "Select Patient", new { @class = "form-control" })
+</div>
+@Html.HiddenFor(a => a.Appointment.Id)
+    <button type="submit" class="btn btn-danger">Save</button>
+}

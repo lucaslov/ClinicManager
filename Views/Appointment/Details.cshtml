@@ -1,0 +1,14 @@
+﻿@model ClinicManager.Models.Appointment
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<ul>
+    <li>Date: @Model.Date</li>
+    <li>Patient: @Model.Patient.FullName</li>
+    <li>Patient's symptoms and description: @Model.Description</li>
+    <li>Doctor: @Model.Doctor.FullName</li>
+    <li>Patient's phone number: @Model.Patient.PhoneNumber</li>
+    <li>Doctor's phone number: @Model.Doctor.PhoneNumber</li>
+</ul>

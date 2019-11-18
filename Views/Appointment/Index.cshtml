@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ClinicManager.Models.Appointment>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<h3>@Html.ActionLink("Add new appointment", "New", "Appointment")</h3>
+<ul>
+    @foreach(var appointment in Model)
+    {
+        <li>
+            @Html.ActionLink("Details", "Details", "Appointment", new { id = appointment.Id}, null) |
+            @appointment.Patient.FullName | 
+            @Html.ActionLink("Edit", "Edit", "Appointment", new { id = appointment.Id}, null) | 
+            @Html.ActionLink("Delete", "Delete", "Appointment", new { id = appointment.Id}, null)
+        </li>
+    }
+</ul>
