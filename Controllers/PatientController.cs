@@ -1,6 +1,8 @@
 ﻿using ClinicManager.Models;
+using ClinicManager.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace ClinicManager.Controllers
 {
@@ -58,6 +60,17 @@ namespace ClinicManager.Controllers
             }
             _context.SaveChanges();
             return RedirectToAction("Index", "Patient");
+        }
+        public ActionResult Appointments(int id)
+        {
+            var appointments = _context.Appointments.Include(d => d.Doctor).Where(a => a.PatientId == id);
+            var patient = _context.Patients.SingleOrDefault(p => p.Id == id);
+            var viewmodel = new PatientsAppointmentsViewModel
+            {
+                Appointments = appointments,
+                Patient = patient
+            };
+            return View(viewmodel);
         }
     }
 }

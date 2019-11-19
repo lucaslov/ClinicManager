@@ -1,4 +1,4 @@
-﻿@model ClinicManager.ViewModels.AppointmentsViewModel
+﻿@model ClinicManager.ViewModels.DoctorsAppointmentsViewModel
 @{
     ViewBag.Title = "Appointments";
 }
@@ -11,6 +11,7 @@
         <li>
             @Html.ActionLink("Details", "Details", "Appointment", new { id = appointment.Id }, null) |
             @appointment.Patient.FullName |
+            @appointment.Date.ToString() |
             @Html.ActionLink("Edit", "Edit", "Appointment", new { id = appointment.Id }, null) |
             @Html.ActionLink("Delete", "Delete", "Appointment", new { id = appointment.Id }, null)
         </li>

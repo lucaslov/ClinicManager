@@ -76,7 +76,7 @@ namespace ClinicManager.Controllers
         {
             var appointments = _context.Appointments.Include(p => p.Patient).Where(d => d.DoctorId == id);
             var doctor = _context.Doctors.SingleOrDefault(d => d.Id == id);
-            var viewModel = new AppointmentsViewModel
+            var viewModel = new DoctorsAppointmentsViewModel
             {
                 Appointments = appointments,
                 Doctor = doctor
