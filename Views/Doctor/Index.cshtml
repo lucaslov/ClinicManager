@@ -10,6 +10,7 @@
     {
         <li>
             @Html.ActionLink(doctor.FullName, "Details", "Doctor", new { id = doctor.Id}, null) | 
+            @Html.ActionLink("Appointments", "Appointments", "Doctor", new { id = doctor.Id}, null) |
             @doctor.Specialization.Name | 
             @Html.ActionLink("Edit", "Edit", "Doctor", new { id = doctor.Id}, null)
             @Html.ActionLink("Delete", "Delete", "Doctor", new { id = doctor.Id}, null)

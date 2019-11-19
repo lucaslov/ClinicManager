@@ -72,5 +72,16 @@ namespace ClinicManager.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Doctor");
         }
+        public ActionResult Appointments(int id)
+        {
+            var appointments = _context.Appointments.Include(p => p.Patient).Where(d => d.DoctorId == id);
+            var doctor = _context.Doctors.SingleOrDefault(d => d.Id == id);
+            var viewModel = new AppointmentsViewModel
+            {
+                Appointments = appointments,
+                Doctor = doctor
+            };
+            return View(viewModel);
+        }
     }
 }
