@@ -46,20 +46,27 @@ namespace ClinicManager.Controllers
         }
         public ActionResult Save(Patient patient)
         {
-            if (patient.Id == 0) _context.Patients.Add(patient);
+            if (ModelState.IsValid)
+            {
+                if (patient.Id == 0) _context.Patients.Add(patient);
+                else
+                {
+                    var patientInDb = _context.Patients.SingleOrDefault(p => p.Id == patient.Id);
+                    patientInDb.FullName = patient.FullName;
+                    patientInDb.BirthDate = patient.BirthDate;
+                    patientInDb.PhoneNumber = patient.PhoneNumber;
+                    patientInDb.EMail = patient.EMail;
+                    patientInDb.Address = patient.Address;
+                    patientInDb.Height = patient.Height;
+                    patientInDb.Weight = patient.Weight;
+                }
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Patient");
+            }
             else
             {
-                var patientInDb = _context.Patients.SingleOrDefault(p => p.Id == patient.Id);
-                patientInDb.FullName = patient.FullName;
-                patientInDb.BirthDate = patient.BirthDate;
-                patientInDb.PhoneNumber = patient.PhoneNumber;
-                patientInDb.EMail = patient.EMail;
-                patientInDb.Address = patient.Address;
-                patientInDb.Height = patient.Height;
-                patientInDb.Weight = patient.Weight;
+                return View("PatientForm", patient);
             }
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Patient");
         }
         public ActionResult Appointments(int id)
         {

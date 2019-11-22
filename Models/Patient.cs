@@ -9,15 +9,19 @@ namespace ClinicManager.Models
     public class Patient
     {
         public int Id { get; set; }
+        [Display(Name ="Full name")]
         [Required]
         [MaxLength(255)]
         public string FullName { get; set; }
+        [Display(Name = "Date of birth")]
         [Required]
         public DateTime BirthDate { get; set; }
-        [Required]
+        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Please enter patient's phone number - it is required.")]
         [Phone]
         public string PhoneNumber { get; set; }
-        [Required]
+        [Display(Name = "E-mail address")]
+        [Required(ErrorMessage = "Please enter patient's email address - it is required.")]
         [EmailAddress]
         public string EMail { get; set; }
         public string Address { get; set; }
