@@ -59,18 +59,31 @@ namespace ClinicManager.Controllers
         }
         public ActionResult Save(Doctor doctor)
         {
-            if (doctor.Id == 0) _context.Doctors.Add(doctor);
+            if (ModelState.IsValid)
+            {
+                if (doctor.Id == 0) _context.Doctors.Add(doctor);
+                else
+                {
+                    var doctorInDb = _context.Doctors.SingleOrDefault(d => d.Id == doctor.Id);
+                    doctorInDb.FullName = doctor.FullName;
+                    doctorInDb.PhoneNumber = doctor.PhoneNumber;
+                    doctorInDb.EMail = doctor.EMail;
+                    doctorInDb.Address = doctor.Address;
+                    doctorInDb.SpecializationId = doctor.SpecializationId;
+                }
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Doctor");
+            }
             else
             {
-                var doctorInDb = _context.Doctors.SingleOrDefault(d => d.Id == doctor.Id);
-                doctorInDb.FullName = doctor.FullName;
-                doctorInDb.PhoneNumber = doctor.PhoneNumber;
-                doctorInDb.EMail = doctor.EMail;
-                doctorInDb.Address = doctor.Address;
-                doctorInDb.SpecializationId = doctor.SpecializationId;
+                var specializations = _context.Specializations.ToList();
+                var viewModel = new DoctorFormViewModel
+                {
+                    Specializations = specializations,
+                    Doctor = doctor
+                };
+                return View("DoctorForm", viewModel);
             }
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Doctor");
         }
         public ActionResult Appointments(int id)
         {
