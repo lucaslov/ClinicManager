@@ -68,17 +68,32 @@ namespace ClinicManager.Controllers
         }
         public ActionResult Save(Appointment appointment)
         {
-            if (appointment.Id == 0) _context.Appointments.Add(appointment);
+            if (ModelState.IsValid)
+            {
+                if (appointment.Id == 0) _context.Appointments.Add(appointment);
+                else
+                {
+                    var appointmentInDb = _context.Appointments.SingleOrDefault(a => a.Id == appointment.Id);
+                    appointmentInDb.Description = appointment.Description;
+                    appointmentInDb.Date = appointment.Date;
+                    appointmentInDb.PatientId = appointment.PatientId;
+                    appointmentInDb.DoctorId = appointment.DoctorId;
+                }
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Appointment");
+            }
             else
             {
-                var appointmentInDb = _context.Appointments.SingleOrDefault(a => a.Id == appointment.Id);
-                appointmentInDb.Description = appointment.Description;
-                appointmentInDb.Date = appointment.Date;
-                appointmentInDb.PatientId = appointment.PatientId;
-                appointmentInDb.DoctorId = appointment.DoctorId;
+                var patients = _context.Patients;
+                var doctors = _context.Doctors;
+                var viewModel = new AppointmentFormViewModel
+                {
+                    Appointment = appointment,
+                    Patients = patients,
+                    Doctors = doctors
+                };
+                return View("AppointmentForm", viewModel);
             }
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Appointment");
         }
     }
 }
