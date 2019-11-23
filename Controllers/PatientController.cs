@@ -44,6 +44,8 @@ namespace ClinicManager.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Patient");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Patient patient)
         {
             if (ModelState.IsValid)

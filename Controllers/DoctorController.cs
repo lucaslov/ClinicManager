@@ -57,6 +57,8 @@ namespace ClinicManager.Controllers
             };
             return View("DoctorForm", viewModel);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Doctor doctor)
         {
             if (ModelState.IsValid)

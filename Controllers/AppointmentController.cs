@@ -66,6 +66,8 @@ namespace ClinicManager.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Appointment");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Appointment appointment)
         {
             if (ModelState.IsValid)
