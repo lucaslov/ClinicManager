@@ -6,6 +6,10 @@
 <h2>AppointmentForm</h2>
 @using (Html.BeginForm("Save", "Appointment"))
 {
+    if (Model.Appointment != null)
+    {
+        @Html.HiddenFor(a => a.Appointment.Id)
+    }
     @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(a => a.Appointment.Date)

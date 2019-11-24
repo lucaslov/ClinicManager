@@ -6,6 +6,11 @@
 <h2>DoctorForm</h2>
 @using (Html.BeginForm("Save", "Doctor"))
 {
+    if (Model.Doctor != null)
+    {
+        @Html.HiddenFor(d => d.Doctor.Id)
+    }
+    @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(d => d.Doctor.FullName)
         @Html.TextBoxFor(d => d.Doctor.FullName, new { @class = "form-control" })
@@ -26,18 +31,21 @@
         @Html.TextBoxFor(d => d.Doctor.Address, new { @class = "form-control" })
     </div>
     <div class="form-group">
+        @Html.LabelFor(d => d.Doctor.MaxAppointmentsPerDay)
+        @Html.TextBoxFor(d => d.Doctor.MaxAppointmentsPerDay, new { @class = "form-control" })
+        @Html.ValidationMessageFor(d => d.Doctor.MaxAppointmentsPerDay)
+    </div>
+    <div class="form-group">
         @Html.LabelFor(d => d.Doctor.SpecializationId)
         @Html.DropDownListFor(d => d.Doctor.SpecializationId,
         new SelectList(Model.Specializations, "Id", "Name"),
         "Select Specialization", new { @class = "form-control" })
         @Html.ValidationMessageFor(d => d.Doctor.SpecializationId)
     </div>
-    @Html.HiddenFor(d => d.Doctor.Id)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 }
 
-@section scripts
-{
+@section scripts{
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -3,7 +3,7 @@ namespace ClinicManager.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class PopulateSpecializations : DbMigration
+    public partial class specializations : DbMigration
     {
         public override void Up()
         {
@@ -27,7 +27,6 @@ namespace ClinicManager.Migrations
             Sql("INSERT INTO Specializations (Name) VALUES ('Radiation Oncology')");
             Sql("INSERT INTO Specializations (Name) VALUES ('Surgery')");
             Sql("INSERT INTO Specializations (Name) VALUES ('Urology')");
-
         }
         
         public override void Down()

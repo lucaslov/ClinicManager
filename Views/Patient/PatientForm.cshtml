@@ -7,6 +7,10 @@
 
 @using (Html.BeginForm("Save", "Patient"))
 {
+    if (Model != null)
+    {
+        @Html.HiddenFor(p => p.Id)
+    }
     <div class="form-group">
         @Html.LabelFor(p => p.FullName)
         @Html.TextBoxFor(p => p.FullName, new { @class = "form-control" })
@@ -39,7 +43,6 @@
         @Html.LabelFor(p => p.Weight)
         @Html.TextBoxFor(p => p.Weight, new { @class = "form-control" })
     </div>
-    @Html.HiddenFor(p => p.Id)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 }

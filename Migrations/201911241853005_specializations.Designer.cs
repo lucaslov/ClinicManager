@@ -7,13 +7,13 @@ namespace ClinicManager.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddMaxAppointmentsPerDayToDoctorModel : IMigrationMetadata
+    public sealed partial class specializations : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddMaxAppointmentsPerDayToDoctorModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(specializations));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911241052132_AddMaxAppointmentsPerDayToDoctorModel"; }
+            get { return "201911241853005_specializations"; }
         }
         
         string IMigrationMetadata.Source

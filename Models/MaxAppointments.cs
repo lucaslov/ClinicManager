@@ -18,13 +18,13 @@ namespace ClinicManager.Models
             //appointments with choosen doctor and date
             var appointments = _context.Appointments.Where(a => a.Date == appointmentDate && a.DoctorId == doctorId).Count();
            
-            if (appointments < doctorMaxAppointments)
+            if (appointments == doctorMaxAppointments || appointment == null)
             {
-                return ValidationResult.Success;
+                return new ValidationResult("There are too many appointments with this doctor. Please change date or selected doctor.");
             }
             else
             {
-                return new ValidationResult("There are too many appointments with this doctor. Please change date or selected doctor.");
+                return ValidationResult.Success;
             }
             
         }

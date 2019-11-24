@@ -176,29 +176,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911151745511_InitialModel.cs" />
-    <Compile Include="Migrations\201911151745511_InitialModel.Designer.cs">
-      <DependentUpon>201911151745511_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\201911241843548_newInit.cs" />
+    <Compile Include="Migrations\201911241843548_newInit.Designer.cs">
+      <DependentUpon>201911241843548_newInit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911151753209_AddBasicModelsToDB.cs" />
-    <Compile Include="Migrations\201911151753209_AddBasicModelsToDB.Designer.cs">
-      <DependentUpon>201911151753209_AddBasicModelsToDB.cs</DependentUpon>
+    <Compile Include="Migrations\201911241845268_PopulateSpecializationsTable.cs" />
+    <Compile Include="Migrations\201911241845268_PopulateSpecializationsTable.Designer.cs">
+      <DependentUpon>201911241845268_PopulateSpecializationsTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911161809397_PopulateSpecializations.cs" />
-    <Compile Include="Migrations\201911161809397_PopulateSpecializations.Designer.cs">
-      <DependentUpon>201911161809397_PopulateSpecializations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911161859107_AddDataAnnotationsAndEMailProp.cs" />
-    <Compile Include="Migrations\201911161859107_AddDataAnnotationsAndEMailProp.Designer.cs">
-      <DependentUpon>201911161859107_AddDataAnnotationsAndEMailProp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911241052132_AddMaxAppointmentsPerDayToDoctorModel.cs" />
-    <Compile Include="Migrations\201911241052132_AddMaxAppointmentsPerDayToDoctorModel.Designer.cs">
-      <DependentUpon>201911241052132_AddMaxAppointmentsPerDayToDoctorModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911241636180_IdKey.cs" />
-    <Compile Include="Migrations\201911241636180_IdKey.Designer.cs">
-      <DependentUpon>201911241636180_IdKey.cs</DependentUpon>
+    <Compile Include="Migrations\201911241853005_specializations.cs" />
+    <Compile Include="Migrations\201911241853005_specializations.Designer.cs">
+      <DependentUpon>201911241853005_specializations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -302,23 +290,14 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201911151745511_InitialModel.resx">
-      <DependentUpon>201911151745511_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911241843548_newInit.resx">
+      <DependentUpon>201911241843548_newInit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911151753209_AddBasicModelsToDB.resx">
-      <DependentUpon>201911151753209_AddBasicModelsToDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911241845268_PopulateSpecializationsTable.resx">
+      <DependentUpon>201911241845268_PopulateSpecializationsTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911161809397_PopulateSpecializations.resx">
-      <DependentUpon>201911161809397_PopulateSpecializations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911161859107_AddDataAnnotationsAndEMailProp.resx">
-      <DependentUpon>201911161859107_AddDataAnnotationsAndEMailProp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911241052132_AddMaxAppointmentsPerDayToDoctorModel.resx">
-      <DependentUpon>201911241052132_AddMaxAppointmentsPerDayToDoctorModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911241636180_IdKey.resx">
-      <DependentUpon>201911241636180_IdKey.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911241853005_specializations.resx">
+      <DependentUpon>201911241853005_specializations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -82,7 +82,7 @@ namespace ClinicManager.Controllers
                     appointmentInDb.DoctorId = appointment.DoctorId;
                 }
                 _context.SaveChanges();
-                return View("Index");
+                return RedirectToAction("Index");
             }
             else
             {

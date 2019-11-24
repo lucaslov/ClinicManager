@@ -7,13 +7,13 @@ namespace ClinicManager.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddBasicModelsToDB : IMigrationMetadata
+    public sealed partial class PopulateSpecializationsTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddBasicModelsToDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PopulateSpecializationsTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911151753209_AddBasicModelsToDB"; }
+            get { return "201911241845268_PopulateSpecializationsTable"; }
         }
         
         string IMigrationMetadata.Source
