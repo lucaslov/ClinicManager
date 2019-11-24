@@ -27,6 +27,8 @@ namespace ClinicManager.Models
         public int SpecializationId { get; set; }
         public Specialization Specialization { get; set; }
         public ICollection<Appointment> Appointments { get; set; }
-
+        [Display(Name = "Maximum appointments per day")]
+        [Required(ErrorMessage = "Please enter maximum number of appointments that doctor is willing to take per day.")]
+        public byte MaxAppointmentsPerDay { get; set; }
     }
 }

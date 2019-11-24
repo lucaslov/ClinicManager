@@ -6,6 +6,7 @@
 <h2>AppointmentForm</h2>
 @using (Html.BeginForm("Save", "Appointment"))
 {
+    @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(a => a.Appointment.Date)
         @Html.TextBoxFor(a => a.Appointment.Date, new { @class = "form-control" })
@@ -33,7 +34,6 @@
         @Html.ValidationMessageFor(a => a.Appointment.PatientId)
 
     </div>
-    @Html.HiddenFor(a => a.Appointment.Id)
     @Html.AntiForgeryToken()
 
     <button type="submit" class="btn btn-danger">Save</button>

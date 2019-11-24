@@ -9,12 +9,12 @@ namespace ClinicManager.Models
     public class Appointment
     {
         public int Id { get; set; }
-
         [Required(ErrorMessage = "Please enter description - it is required.")]
         [MaxLength(500, ErrorMessage = "Description maximum of 500 characters.")]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Please enter appointment's date - it is required.")]
+        [MaxAppointments]
         public DateTime Date { get; set; }
 
         [Display(Name = "Patient")]
