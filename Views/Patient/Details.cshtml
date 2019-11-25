@@ -7,6 +7,7 @@
 <ul>
     <li>Name: @Model.FullName</li>
     <li>Date of Birth: @Model.BirthDate.Date</li>
+    <li>Insurance: @(Model.IsInsured?"Yes":"No")</li>
     <li>Phone Number: @Model.PhoneNumber</li>
     <li>E-mail Address: @Model.EMail</li>
     @if (!string.IsNullOrEmpty(Model.Address))

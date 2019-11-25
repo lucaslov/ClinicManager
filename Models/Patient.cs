@@ -27,6 +27,8 @@ namespace ClinicManager.Models
         public string Address { get; set; }
         public string Height { get; set; }
         public string Weight { get; set; }
+        [Display(Name = "Is patient insured?")]
+        public bool IsInsured { get; set; }
         public ICollection<Appointment> Appointments { get; set; }
         public ICollection<Visit> Visits{ get; set; }
     }

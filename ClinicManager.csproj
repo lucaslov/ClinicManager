@@ -188,6 +188,18 @@
     <Compile Include="Migrations\201911241853005_specializations.Designer.cs">
       <DependentUpon>201911241853005_specializations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911251901250_AddVisitPriceToSpecializations.cs" />
+    <Compile Include="Migrations\201911251901250_AddVisitPriceToSpecializations.Designer.cs">
+      <DependentUpon>201911251901250_AddVisitPriceToSpecializations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911252106335_AddInsuranceLastRenewalDatePropToPatientModel.cs" />
+    <Compile Include="Migrations\201911252106335_AddInsuranceLastRenewalDatePropToPatientModel.Designer.cs">
+      <DependentUpon>201911252106335_AddInsuranceLastRenewalDatePropToPatientModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911252126147_ChangeInsuranceData.cs" />
+    <Compile Include="Migrations\201911252126147_ChangeInsuranceData.Designer.cs">
+      <DependentUpon>201911252126147_ChangeInsuranceData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -298,6 +310,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911241853005_specializations.resx">
       <DependentUpon>201911241853005_specializations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911251901250_AddVisitPriceToSpecializations.resx">
+      <DependentUpon>201911251901250_AddVisitPriceToSpecializations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911252106335_AddInsuranceLastRenewalDatePropToPatientModel.resx">
+      <DependentUpon>201911252106335_AddInsuranceLastRenewalDatePropToPatientModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911252126147_ChangeInsuranceData.resx">
+      <DependentUpon>201911252126147_ChangeInsuranceData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

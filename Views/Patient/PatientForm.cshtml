@@ -43,6 +43,10 @@
         @Html.LabelFor(p => p.Weight)
         @Html.TextBoxFor(p => p.Weight, new { @class = "form-control" })
     </div>
+    <div>
+        @Html.LabelFor(p => p.IsInsured)
+        @Html.CheckBoxFor(p => p.IsInsured, new { @class = "form-check-input" })
+    </div>
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 }
