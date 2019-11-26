@@ -14,6 +14,8 @@ namespace ClinicManager.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Please enter appointment's date - it is required.")]
+        [NotInWeekends]
+        [DateInTheFuture]
         [MaxAppointments]
         public DateTime Date { get; set; }
 
