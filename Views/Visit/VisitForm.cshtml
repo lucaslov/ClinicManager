@@ -1,0 +1,59 @@
+﻿@model ClinicManager.ViewModels.VisitFormViewModel
+@{
+    ViewBag.Title = "VisitForm";
+}
+
+<h2>AVisitForm</h2>
+@using (Html.BeginForm("Save", "Visit"))
+{
+    if (Model.Visit != null)
+    {
+        @Html.HiddenFor(v => v.Visit.Id)
+    }
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(v => v.Visit.DoctorId)
+        @Html.DropDownListFor(v => v.Visit.DoctorId,
+        new SelectList(Model.Doctors, "Id", "FullName"),
+        "Select Doctor", new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Visit.DoctorId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Visit.PatientId)
+        @Html.DropDownListFor(v => v.Visit.PatientId,
+        new SelectList(Model.Patients, "Id", "FullName"),
+        "Select Patient", new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Visit.PatientId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Visit.AppointmentId)
+        @Html.DropDownListFor(v => v.Visit.AppointmentId,
+        new SelectList(Model.Appointments, "Id", "Patient.FullName"),
+        "Select Appointment", new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Visit.AppointmentId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Visit.Diagnosis)
+        @Html.TextBoxFor(v => v.Visit.Diagnosis, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Visit.Diagnosis)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Visit.Prescription)
+        @Html.TextBoxFor(v => v.Visit.Prescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Visit.Prescription)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(v => v.Visit.AdditionalDescription)
+        @Html.TextBoxFor(v => v.Visit.AdditionalDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(v => v.Visit.AdditionalDescription)
+    </div>
+    @Html.AntiForgeryToken()
+
+    <button type="submit" class="btn btn-danger">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

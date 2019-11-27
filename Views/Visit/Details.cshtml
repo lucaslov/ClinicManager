@@ -1,0 +1,16 @@
+﻿@model ClinicManager.Models.Visit
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<ul>
+    <li>Diagnosis: @Model.Diagnosis</li>
+    <li>Prescription: @Model.Prescription</li>
+    <li>Additional desription: @Model.AdditionalDescription</li>
+    <li>Doctor: @Model.Doctor.FullName</li>
+    <li>Patient: @Model.Patient.FullName</li>
+    <li>Was appointed? @if (Model.AppointmentId == null)
+    { @("No")}
+    else { @("Yes")} </li>
+</ul>
