@@ -1,0 +1,15 @@
+﻿@model ClinicManager.ViewModels.DoctorsVisitsViewModel
+@{
+    ViewBag.Title = "Visits";
+}
+
+<h2>@Model.Doctor.FullName Visits</h2>
+<ul>
+    @foreach (var visit in Model.Visits)
+    {
+        <li>
+            Date: @visit.Date | Patient: @visit.Patient.FullName
+            | @Html.ActionLink("Details", "Details", "Visit", new { id = visit.Id }, null)
+        </li>
+    }
+</ul>

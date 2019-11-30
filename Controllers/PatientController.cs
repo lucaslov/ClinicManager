@@ -3,6 +3,7 @@ using ClinicManager.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
+using AutoMapper;
 
 namespace ClinicManager.Controllers
 {
@@ -80,6 +81,17 @@ namespace ClinicManager.Controllers
                 Patient = patient
             };
             return View(viewmodel);
+        }
+        public ActionResult Visits(int id)
+        {
+            var patient = _context.Patients.SingleOrDefault(p => p.Id == id);
+            var visits = _context.Visits.Include(d => d.Doctor).Where(v => v.PatientId == id);
+            var viewModel = new PatientsVisitsViewModel
+            {
+                Patient = patient,
+                Visits = visits
+            };
+            return View(viewModel);
         }
     }
 }

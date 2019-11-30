@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -205,12 +208,17 @@
     <Compile Include="Migrations\201911262205324_AddAppointmentToVisitModel.Designer.cs">
       <DependentUpon>201911262205324_AddAppointmentToVisitModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911301426333_AddDateAndAnnotationsToVisitModel.cs" />
+    <Compile Include="Migrations\201911301426333_AddDateAndAnnotationsToVisitModel.Designer.cs">
+      <DependentUpon>201911301426333_AddDateAndAnnotationsToVisitModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Validation\DateInTheFuture.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ViewModels\DoctorsVisitsViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Validation\MaxAppointments.cs" />
     <Compile Include="Models\Validation\NotInWeekends.cs" />
@@ -223,6 +231,7 @@
     <Compile Include="ViewModels\DoctorsAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\DoctorFormViewModel.cs" />
     <Compile Include="ViewModels\PatientsAppointmentsViewModel.cs" />
+    <Compile Include="ViewModels\PatientsVisitsViewModel.cs" />
     <Compile Include="ViewModels\VisitFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -299,6 +308,8 @@
     <Content Include="Views\Visit\Index.cshtml" />
     <Content Include="Views\Visit\Details.cshtml" />
     <Content Include="Views\Visit\VisitForm.cshtml" />
+    <Content Include="Views\Patient\Visits.cshtml" />
+    <Content Include="Views\Doctor\Visits.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -337,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911262205324_AddAppointmentToVisitModel.resx">
       <DependentUpon>201911262205324_AddAppointmentToVisitModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911301426333_AddDateAndAnnotationsToVisitModel.resx">
+      <DependentUpon>201911301426333_AddDateAndAnnotationsToVisitModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -98,5 +98,16 @@ namespace ClinicManager.Controllers
             };
             return View(viewModel);
         }
+        public ActionResult Visits(int id)
+        {
+            var doctor = _context.Doctors.SingleOrDefault(d => d.Id == id);
+            var visits = _context.Visits.Include(p => p.Patient).Where(v => v.DoctorId == id);
+            var viewModel = new DoctorsVisitsViewModel
+            {
+                Doctor = doctor,
+                Visits = visits
+            };
+            return View(viewModel);
+        }
     }
 }

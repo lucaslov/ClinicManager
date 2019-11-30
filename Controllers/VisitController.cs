@@ -80,7 +80,11 @@ namespace ClinicManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (visit.Id == 0) _context.Visits.Add(visit);
+                if (visit.Id == 0)
+                {
+                    visit.Date = DateTime.Now;
+                    _context.Visits.Add(visit);
+                }
                 else
                 {
                     var visitInDb = _context.Visits.SingleOrDefault(v => v.Id == visit.Id);
