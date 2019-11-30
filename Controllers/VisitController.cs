@@ -83,6 +83,18 @@ namespace ClinicManager.Controllers
                 if (visit.Id == 0)
                 {
                     visit.Date = DateTime.Now;
+                    var VisitCost = _context.Doctors.Include(d => d.Specialization)
+                        .SingleOrDefault(d => d.Id == visit.DoctorId)
+                        .Specialization.VisitPrice;
+                    if (_context.Patients.SingleOrDefault(p => p.Id == visit.PatientId).IsInsured)
+                    {
+                        var discount = 0.9;
+                        visit.Cost = VisitCost * (decimal)(discount);
+                    }
+                    else
+                    {
+                        visit.Cost = VisitCost;
+                    }
                     _context.Visits.Add(visit);
                 }
                 else

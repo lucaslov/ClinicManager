@@ -10,8 +10,9 @@
     {
         <li>
             @Html.ActionLink("Details", "Details", "Visit", new { id = visit.Id }, null) |
-            @visit.Patient.FullName |
-            @visit.Doctor.FullName
+            Patient: @visit.Patient.FullName |
+            Doctor: @visit.Doctor.FullName |
+            Visit Cost: @visit.Cost |
             @Html.ActionLink("Edit", "Edit", "Visit", new { id = visit.Id }, null) |
             @Html.ActionLink("Delete", "Delete", "Visit", new { id = visit.Id }, null)
         </li>
