@@ -4,23 +4,28 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
 using AutoMapper;
+using ClinicManager.Services;
+using Ninject;
 
 namespace ClinicManager.Controllers
 {
     public class PatientController : Controller
     {
         private ApplicationDbContext _context;
-        public PatientController()
+        
+        private  IPatientService _patientService;
+        public PatientController(IPatientService patientService)
         {
             _context = new ApplicationDbContext();
+            _patientService = patientService;
         }
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
         }
         public ActionResult Index()
-        {
-            var patients = _context.Patients;
+        { 
+            var patients = _patientService.GetAllPatients(); 
             return View(patients);
         }
         public ActionResult New()
@@ -29,20 +34,19 @@ namespace ClinicManager.Controllers
         }
         public ActionResult Details(int id)
         {
-            var patient = _context.Patients.FirstOrDefault(p => p.Id == id);
+            var patient = _patientService.GetPatient(id);
+            if (patient == null) return HttpNotFound();
             return View(patient);
         }
         public ActionResult Edit(int id)
         {
-            var patient = _context.Patients.FirstOrDefault(p => p.Id == id);
+            var patient = _patientService.GetPatient(id);
             if (patient == null) return HttpNotFound();
             return View("PatientForm", patient);
         }
         public ActionResult Delete(int id)
         {
-            var patient = _context.Patients.FirstOrDefault(p => p.Id == id);
-            _context.Patients.Remove(patient);
-            _context.SaveChanges();
+            _patientService.DeletePatient(id);
             return RedirectToAction("Index", "Patient");
         }
         [HttpPost]
@@ -51,19 +55,11 @@ namespace ClinicManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (patient.Id == 0) _context.Patients.Add(patient);
+                if (patient.Id == 0) _patientService.AddPatient(patient);
                 else
                 {
-                    var patientInDb = _context.Patients.SingleOrDefault(p => p.Id == patient.Id);
-                    patientInDb.FullName = patient.FullName;
-                    patientInDb.BirthDate = patient.BirthDate;
-                    patientInDb.PhoneNumber = patient.PhoneNumber;
-                    patientInDb.EMail = patient.EMail;
-                    patientInDb.Address = patient.Address;
-                    patientInDb.Height = patient.Height;
-                    patientInDb.Weight = patient.Weight;
+                    _patientService.EditPatient(patient);
                 }
-                _context.SaveChanges();
                 return RedirectToAction("Index", "Patient");
             }
             else
