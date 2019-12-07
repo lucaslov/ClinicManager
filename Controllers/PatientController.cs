@@ -5,23 +5,15 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using AutoMapper;
 using ClinicManager.Services;
-using Ninject;
 
 namespace ClinicManager.Controllers
 {
     public class PatientController : Controller
     {
-        private ApplicationDbContext _context;
-        
         private  IPatientService _patientService;
         public PatientController(IPatientService patientService)
         {
-            _context = new ApplicationDbContext();
             _patientService = patientService;
-        }
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
         }
         public ActionResult Index()
         { 
@@ -69,24 +61,12 @@ namespace ClinicManager.Controllers
         }
         public ActionResult Appointments(int id)
         {
-            var appointments = _context.Appointments.Include(d => d.Doctor).Where(a => a.PatientId == id);
-            var patient = _context.Patients.SingleOrDefault(p => p.Id == id);
-            var viewmodel = new PatientsAppointmentsViewModel
-            {
-                Appointments = appointments,
-                Patient = patient
-            };
+            var viewmodel = _patientService.GetPatientsAppointmentsViewModel(id);
             return View(viewmodel);
         }
         public ActionResult Visits(int id)
         {
-            var patient = _context.Patients.SingleOrDefault(p => p.Id == id);
-            var visits = _context.Visits.Include(d => d.Doctor).Where(v => v.PatientId == id);
-            var viewModel = new PatientsVisitsViewModel
-            {
-                Patient = patient,
-                Visits = visits
-            };
+            var viewModel = _patientService.GetPatientsVisitsViewModel(id);
             return View(viewModel);
         }
     }

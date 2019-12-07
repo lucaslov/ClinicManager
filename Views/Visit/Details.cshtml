@@ -3,7 +3,7 @@
     ViewBag.Title = "Details";
 }
 @Html.ActionLink("All Visits", "Index", "Visit")
-@Html.ActionLink($"{Model.Patient.FullName}'s visits", "Visits", "Patient", new {id = Model.Id}, null)
+@Html.ActionLink($"{Model.Patient.FullName}'s visits", "Visits", "Patient", new {id = Model.PatientId}, null)
 @Html.ActionLink($"{Model.Doctor.FullName}'s visits", "Visits", "Doctor", new { id = Model.DoctorId}, null)
 <h2>Details</h2>
 <ul>

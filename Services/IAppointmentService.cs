@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ClinicManager.Services
 {
-    public interface IPatientService : IPatientRepository
+    public interface IAppointmentService : IAppointmentRepository
     {
-        PatientsAppointmentsViewModel GetPatientsAppointmentsViewModel(int id);
-        PatientsVisitsViewModel GetPatientsVisitsViewModel(int id);
+        AppointmentFormViewModel GetEditAppointmentFormViewModel(int id);
+        AppointmentFormViewModel GetNewAppointmentFormViewModel();
     }
 }

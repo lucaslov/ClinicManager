@@ -62,8 +62,17 @@ namespace ClinicManager.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            //services
             kernel.Bind<IPatientService>().To<PatientService>();
-            kernel.Bind<IDatabaseConnection>().To<DatabaseConnection>();
+            kernel.Bind<IDoctorService>().To<DoctorService>();
+            kernel.Bind<IAppointmentService>().To<AppointmentService>();
+            kernel.Bind<IVisitService>().To<VisitService>();
+            //repositories
+            kernel.Bind<ISpecializationRepository>().To<SpecializationRepository>();
+            kernel.Bind<IDoctorRepository>().To<DoctorRepository>();
+            kernel.Bind<IPatientRepository>().To<PatientRepository>();
+            kernel.Bind<IVisitRepository>().To<VisitRepository>();
+            kernel.Bind<IAppointmentRepository>().To<AppointmentRepository>();
         }        
     }
 }

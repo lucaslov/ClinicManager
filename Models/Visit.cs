@@ -30,5 +30,9 @@ namespace ClinicManager.Models
         public Appointment Appointment { get; set; }
         [Column(TypeName = "money")]
         public decimal Cost { get; set; }
+        public static readonly byte MinimumVisitsForLoyaltyDiscount = 3;
+        //discounts percentage 
+        public static readonly byte InsuranceDiscount = 10;
+        public static readonly byte LoyaltyDiscount = 8;
     }
 }

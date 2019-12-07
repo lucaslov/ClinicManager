@@ -233,10 +233,24 @@
       <DependentUpon>201911301743597_AddCostPropToVisitModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Repositories\AppointmentRepository.cs" />
+    <Compile Include="Repositories\DoctorRepository.cs" />
+    <Compile Include="Repositories\IAppointmentRepository.cs" />
+    <Compile Include="Repositories\IDoctorRepository.cs" />
     <Compile Include="Repositories\IPatientRepository.cs" />
+    <Compile Include="Repositories\ISpecializationRepository.cs" />
+    <Compile Include="Repositories\IVisitRepository.cs" />
     <Compile Include="Repositories\PatientRepository.cs" />
+    <Compile Include="Repositories\SpecializationRepository.cs" />
+    <Compile Include="Repositories\VisitRepository.cs" />
+    <Compile Include="Services\AppointmentService.cs" />
+    <Compile Include="Services\DoctorService.cs" />
+    <Compile Include="Services\IAppointmentService.cs" />
+    <Compile Include="Services\IDoctorService.cs" />
     <Compile Include="Services\IPatientService.cs" />
+    <Compile Include="Services\IVisitService.cs" />
     <Compile Include="Services\PatientService.cs" />
+    <Compile Include="Services\VisitService.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Validation\DateInTheFuture.cs" />

@@ -10,10 +10,13 @@ namespace ClinicManager.Repositories
     public class PatientRepository : IPatientRepository
     {
         private ApplicationDbContext _context;
+        protected void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
         public PatientRepository()
         {
             _context = new ApplicationDbContext();
-            //_databaseConnection = databaseConnection;
         }
         public IEnumerable<Patient> GetAllPatients()
         {

@@ -1,4 +1,5 @@
 ﻿using ClinicManager.Models;
+using ClinicManager.Services;
 using ClinicManager.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,67 +12,34 @@ namespace ClinicManager.Controllers
 {
     public class VisitController : Controller
     {
-        private ApplicationDbContext _context;
-        public VisitController()
+        private IVisitService _visitService;
+        public VisitController(IVisitService visitService)
         {
-            _context = new ApplicationDbContext();
-        }
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
+            _visitService = visitService;
         }
         public ActionResult Index()
         {
-            var visits = _context.Visits
-                .Include(v => v.Patient)
-                .Include(v => v.Doctor)
-                .Include(v => v.Appointment)
-                .ToList();
+            var visits = _visitService.GetAllVisits();
             return View(visits);
         }
         public ActionResult Details(int id)
         {
-            var visit = _context.Visits
-                .Include(v => v.Doctor)
-                .Include(v => v.Patient)
-                .Include(v => v.Appointment)
-                .SingleOrDefault(v => v.Id == id);
+            var visit = _visitService.GetVisit(id);
             return View(visit);
         }
         public ActionResult Delete(int id)
         {
-            var visits = _context.Visits;
-           var visit = _context.Visits.SingleOrDefault(v => v.Id == id);
-            _context.Visits.Remove(visit);
-            _context.SaveChanges();
-            return View("Index", visits);
+            _visitService.DeleteVisit(id);
+            return RedirectToAction("Index");
         }
         public ActionResult Edit(int id)
         {
-            var visit = _context.Visits.SingleOrDefault(v => v.Id == id);
-            var patients = _context.Patients;
-            var appointments = _context.Appointments;
-            var doctors = _context.Doctors;
-            var viewModel = new VisitFormViewModel
-            {
-                Patients = patients,
-                Appointments = appointments,
-                Doctors = doctors,
-                Visit = visit
-            };
+            var viewModel = _visitService.GetEditVisitFormViewModel(id);
             return View("VisitForm", viewModel);
         }
         public ActionResult New()
         {
-            var patients = _context.Patients;
-            var appointments = _context.Appointments;
-            var doctors = _context.Doctors;
-            var viewModel = new VisitFormViewModel
-            {
-                Patients = patients,
-                Appointments = appointments,
-                Doctors = doctors
-            };
+            var viewModel = _visitService.GetNewVisitFormViewModel();
             return View("VisitForm", viewModel);
         }
         [HttpPost]
@@ -82,46 +50,17 @@ namespace ClinicManager.Controllers
             {
                 if (visit.Id == 0)
                 {
-                    visit.Date = DateTime.Now;
-                    var VisitCost = _context.Doctors.Include(d => d.Specialization)
-                        .SingleOrDefault(d => d.Id == visit.DoctorId)
-                        .Specialization.VisitPrice;
-                    if (_context.Patients.SingleOrDefault(p => p.Id == visit.PatientId).IsInsured)
-                    {
-                        var discount = 0.9;
-                        visit.Cost = VisitCost * (decimal)(discount);
-                    }
-                    else
-                    {
-                        visit.Cost = VisitCost;
-                    }
-                    _context.Visits.Add(visit);
+                    _visitService.AddVisit(visit);
                 }
                 else
                 {
-                    var visitInDb = _context.Visits.SingleOrDefault(v => v.Id == visit.Id);
-                    visitInDb.Diagnosis = visit.Diagnosis;
-                    visitInDb.Prescription = visit.Prescription;
-                    visitInDb.AdditionalDescription = visit.AdditionalDescription;
-                    visitInDb.DoctorId = visit.DoctorId;
-                    visitInDb.PatientId = visit.PatientId;
-                    visitInDb.AppointmentId = visit.AppointmentId;
+                    _visitService.EditVisit(visit);
                 }
-                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             else
             {
-                var appointments = _context.Appointments;
-                var patients = _context.Patients;
-                var doctors = _context.Doctors;
-                var viewModel = new VisitFormViewModel
-                {
-                    Visit = visit,
-                    Appointments = appointments,
-                    Patients = patients,
-                    Doctors = doctors
-                };
+                var viewModel = _visitService.GetEditVisitFormViewModel(visit.Id);
                 return View("VisitForm", viewModel);
             }
         }

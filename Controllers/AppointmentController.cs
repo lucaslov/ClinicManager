@@ -6,64 +6,40 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using ClinicManager.ViewModels;
+using ClinicManager.Services;
 
 namespace ClinicManager.Controllers
 {
     public class AppointmentController : Controller
     {
-        private ApplicationDbContext _context;
-        public AppointmentController()
+        private IAppointmentService _AppointmentService;
+        public AppointmentController(IAppointmentService appointmentService)
         {
-            _context = new ApplicationDbContext();
-        }
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
+            _AppointmentService = appointmentService;
         }
         public ActionResult Index()
         {
-            var appointments = _context.Appointments
-                .Include(a => a.Patient)
-                .Include(a => a.Doctor);
+            var appointments = _AppointmentService.GetAllAppointments();
             return View(appointments);
         }
         public ActionResult New()
         {
-            var patients = _context.Patients;
-            var doctors = _context.Doctors;
-            var viewModel = new AppointmentFormViewModel
-            {
-                Patients = patients,
-                Doctors = doctors
-            };
+            var viewModel = _AppointmentService.GetNewAppointmentFormViewModel();
             return View("AppointmentForm", viewModel);
         }
         public ActionResult Details(int id)
         {
-            var appointment = _context.Appointments
-                .Include(a => a.Patient)
-                .Include(a => a.Doctor)
-                .SingleOrDefault(a => a.Id == id);
+            var appointment = _AppointmentService.GetAppointment(id);
             return View(appointment);
         }
         public ActionResult Edit(int id)
         {
-            var patients = _context.Patients;
-            var doctors = _context.Doctors;
-            var appointment = _context.Appointments.SingleOrDefault(a => a.Id == id);
-            var viewModel = new AppointmentFormViewModel
-            {
-                Patients = patients,
-                Doctors = doctors,
-                Appointment = appointment
-            };
+            var viewModel = _AppointmentService.GetEditAppointmentFormViewModel(id);
             return View("AppointmentForm", viewModel);
         }
         public ActionResult Delete(int id)
         {
-            var appointment = _context.Appointments.SingleOrDefault(a => a.Id == id);
-            _context.Appointments.Remove(appointment);
-            _context.SaveChanges();
+            _AppointmentService.DeleteAppointment(id);
             return RedirectToAction("Index", "Appointment");
         }
         [HttpPost]
@@ -72,28 +48,16 @@ namespace ClinicManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (appointment.Id == 0) _context.Appointments.Add(appointment);
+                if (appointment.Id == 0) _AppointmentService.AddAppointment(appointment);
                 else
                 {
-                    var appointmentInDb = _context.Appointments.SingleOrDefault(a => a.Id == appointment.Id);
-                    appointmentInDb.Description = appointment.Description;
-                    appointmentInDb.Date = appointment.Date;
-                    appointmentInDb.PatientId = appointment.PatientId;
-                    appointmentInDb.DoctorId = appointment.DoctorId;
+                    _AppointmentService.EditAppointment(appointment);
                 }
-                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             else
             {
-                var patients = _context.Patients;
-                var doctors = _context.Doctors;
-                var viewModel = new AppointmentFormViewModel
-                {
-                    Appointment = appointment,
-                    Patients = patients,
-                    Doctors = doctors
-                };
+                var viewModel = _AppointmentService.GetEditAppointmentFormViewModel(appointment.Id);
                 return View("AppointmentForm", viewModel);
             }
         }

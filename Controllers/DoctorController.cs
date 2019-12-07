@@ -6,55 +6,40 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ClinicManager.ViewModels;
+using ClinicManager.Services;
 
 namespace ClinicManager.Controllers
 {
     public class DoctorController : Controller
     {
-        private ApplicationDbContext _context;
-        public DoctorController()
+        private IDoctorService _doctorService;
+        public DoctorController(DoctorService doctorService)
         {
-            _context = new ApplicationDbContext();
-        }
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
+            _doctorService = doctorService;
         }
         public ActionResult Index()
         {
-            var doctors = _context.Doctors.Include(d => d.Specialization).ToList();
+            var doctors = _doctorService.GetAllDoctors();
             return View(doctors);
         }
         public ActionResult Details(int id)
         {
-            var doctor = _context.Doctors.Include(d => d.Specialization).FirstOrDefault(d => d.Id == id);
+            var doctor = _doctorService.GetDoctor(id);
             return View(doctor);
         }
         public ActionResult Edit(int id)
         {
-            var doctor = _context.Doctors.Include(d => d.Specialization).FirstOrDefault(d => d.Id == id);
-            var specializations = _context.Specializations.ToList();
-            var viewModel = new DoctorFormViewModel
-            {
-                Specializations = specializations,
-                Doctor = doctor
-            };
+            var viewModel = _doctorService.GetEditDoctorFormViewModel(id);
             return View("DoctorForm", viewModel);
         }
         public ActionResult Delete(int id)
         {
-            var doctor = _context.Doctors.FirstOrDefault(d => d.Id == id);
-            _context.Doctors.Remove(doctor);
-            _context.SaveChanges();
+            _doctorService.DeleteDoctor(id);
             return RedirectToAction("Index", "Doctor");
         }
         public ActionResult New()
         {
-            var specializations = _context.Specializations.ToList();
-            var viewModel = new DoctorFormViewModel
-            {
-                Specializations = specializations
-            };
+            var viewModel = _doctorService.GetNewDoctorFormViewModel();
             return View("DoctorForm", viewModel);
         }
         [HttpPost]
@@ -63,50 +48,27 @@ namespace ClinicManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (doctor.Id == 0) _context.Doctors.Add(doctor);
+                if (doctor.Id == 0) _doctorService.AddDoctor(doctor);
                 else
                 {
-                    var doctorInDb = _context.Doctors.SingleOrDefault(d => d.Id == doctor.Id);
-                    doctorInDb.FullName = doctor.FullName;
-                    doctorInDb.PhoneNumber = doctor.PhoneNumber;
-                    doctorInDb.EMail = doctor.EMail;
-                    doctorInDb.Address = doctor.Address;
-                    doctorInDb.SpecializationId = doctor.SpecializationId;
+                    _doctorService.EditDoctor(doctor);
                 }
-                _context.SaveChanges();
                 return RedirectToAction("Index", "Doctor");
             }
             else
             {
-                var specializations = _context.Specializations.ToList();
-                var viewModel = new DoctorFormViewModel
-                {
-                    Specializations = specializations,
-                    Doctor = doctor
-                };
+                var viewModel = _doctorService.GetEditDoctorFormViewModel(doctor.Id);
                 return View("DoctorForm", viewModel);
             }
         }
         public ActionResult Appointments(int id)
         {
-            var appointments = _context.Appointments.Include(p => p.Patient).Where(d => d.DoctorId == id);
-            var doctor = _context.Doctors.SingleOrDefault(d => d.Id == id);
-            var viewModel = new DoctorsAppointmentsViewModel
-            {
-                Appointments = appointments,
-                Doctor = doctor
-            };
+            var viewModel = _doctorService.GetDoctorsAppointmentsViewModel(id);
             return View(viewModel);
         }
         public ActionResult Visits(int id)
         {
-            var doctor = _context.Doctors.SingleOrDefault(d => d.Id == id);
-            var visits = _context.Visits.Include(p => p.Patient).Where(v => v.DoctorId == id);
-            var viewModel = new DoctorsVisitsViewModel
-            {
-                Doctor = doctor,
-                Visits = visits
-            };
+            var viewModel = _doctorService.GetDoctorsVisitsViewModel(id);
             return View(viewModel);
         }
     }
