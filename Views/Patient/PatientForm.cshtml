@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "PatientForm";
 }
+@Styles.Render("~/bundles/dtpickerstyles")
 <h2>PatientForm</h2>
 
 
@@ -18,7 +19,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(p => p.BirthDate)
-        @Html.TextBoxFor(p => p.BirthDate, new { @class = "form-control" })
+        @Html.TextBoxFor(p => p.BirthDate, new { @class = "form-control datetimepicker", autocomplete="off"  })
         @Html.ValidationMessageFor(p => p.BirthDate)
     </div>
     <div class="form-group">
@@ -54,4 +55,18 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dtpickerjquery")
+    <script>
+        $(document).ready(function () {
+            var thisYear = new Date().getFullYear();
+            var today = new Date();
+            $(".datetimepicker").datetimepicker({
+                theme: 'dark',
+                maxDate: today,
+                yearEnd: thisYear,
+                defaultTime: '00:00',
+                timepicker: false
+            });
+        });
+    </script>
 }

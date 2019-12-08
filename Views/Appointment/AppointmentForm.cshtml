@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "AppointmentForm";
 }
-
+@Styles.Render("~/bundles/dtpickerstyles")
 <h2>AppointmentForm</h2>
 @using (Html.BeginForm("Save", "Appointment"))
 {
@@ -13,7 +13,8 @@
     @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(a => a.Appointment.Date)
-        @Html.TextBoxFor(a => a.Appointment.Date, new { @class = "form-control" })
+        @Html.TextBoxFor(a => a.Appointment.Date,
+        new { @class = "form-control datetimepicker", autocomplete="off" })
         @Html.ValidationMessageFor(a => a.Appointment.Date)
     </div>
     <div class="form-group">
@@ -46,5 +47,22 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dtpickerjquery")
+<script>
+    $(document).ready(function () {
+        var thisYear = new Date().getFullYear();
+        var twoYearsFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 2));
+        $(".datetimepicker").datetimepicker({
+            theme: 'dark',
+            minDate: 0,
+            maxDate: twoYearsFromNow,
+            minTime: '7:00',
+            maxTime: '19:01',
+            yearStart: thisYear,
+            yearEnd: twoYearsFromNow.getFullYear(),
+            disabledWeekDays: [0,6] //weekends
+        });
+    });
+    </script>
 }
 
