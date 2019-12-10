@@ -13,6 +13,7 @@ namespace ClinicManager.Services
     {
         VisitFormViewModel GetNewVisitFormViewModel();
         VisitFormViewModel GetEditVisitFormViewModel(int id);
+        IEnumerable<Appointment> GetTodaysAppointments();
         void AddVisit(Visit visit);
     }
 }

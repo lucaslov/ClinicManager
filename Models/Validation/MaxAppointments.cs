@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinicManager.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,16 +12,26 @@ namespace ClinicManager.Models
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var _context = new ApplicationDbContext();
-            var appointment = (Appointment) validationContext.ObjectInstance;
-            var appointmentDate = appointment.Date;
-            var doctorId = appointment.DoctorId;
-            var doctorMaxAppointments = _context.Doctors.SingleOrDefault(d => d.Id == doctorId).MaxAppointmentsPerDay;
-            //appointments with choosen doctor and date
-            var appointments = _context.Appointments.Where(a => a.Date == appointmentDate && a.DoctorId == doctorId).Count();
-           
-            if (appointments == doctorMaxAppointments || appointment == null)
+            var validatedAppointment = (Appointment) validationContext.ObjectInstance;
+            var doctorMaxAppointments = _context.Doctors
+                .SingleOrDefault(d => d.Id == validatedAppointment.DoctorId)
+                .MaxAppointmentsPerDay;
+            //appointments with chosen doctor and date
+            var appointments = _context.Appointments
+                .Where(a => a.Date == validatedAppointment.Date 
+                && a.DoctorId == validatedAppointment.DoctorId);
+            var maxAppointmentsPerHour = Appointment.MaxAppointmentsPerHour;
+            var appointmentsThatHour = appointments
+                .Where(a => a.Date.Hour == validatedAppointment.Date.Hour);
+
+            if (appointments.Count() == doctorMaxAppointments
+                || validatedAppointment == null)
             {
-                return new ValidationResult("There are too many appointments with this doctor. Please change date or selected doctor.");
+                return new ValidationResult("There are too many appointments with this doctor at that day. Please change appointment time or selected doctor.");
+            }
+            else if (appointmentsThatHour.Count() >= maxAppointmentsPerHour)
+            {
+                return new ValidationResult("There are too many appointments with this doctor at that hour. Please change appointment time or selected doctor.");
             }
             else
             {

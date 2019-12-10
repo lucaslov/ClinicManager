@@ -25,6 +25,15 @@ namespace ClinicManager.Repositories
                  .Include(a => a.Doctor);
             return appointments;
         }
+        public IEnumerable<Appointment> GetTodaysAppointments()
+        {
+            var appointments = _context.Appointments
+                 .Include(a => a.Patient)
+                 .Include(a => a.Doctor)
+                 .Where(a => a.Date == DateTime.Today)
+                 .ToList();
+            return appointments;
+        }
         public Appointment GetAppointment(int id)
         {
             var appointment = _context.Appointments

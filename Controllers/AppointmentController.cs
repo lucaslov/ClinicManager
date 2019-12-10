@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using ClinicManager.ViewModels;
 using ClinicManager.Services;
+using Ninject;
 
 namespace ClinicManager.Controllers
 {

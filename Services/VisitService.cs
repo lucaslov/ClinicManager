@@ -24,7 +24,7 @@ namespace ClinicManager.Services
         {
             var visit = GetVisit(id);
             var patients = _patientRepository.GetAllPatients();
-            var appointments = _appointmentRepository.GetAllAppointments();
+            var appointments = _appointmentRepository.GetTodaysAppointments();
             var doctors = _doctorRepository.GetAllDoctors();
             var viewModel = new VisitFormViewModel
             {
@@ -38,7 +38,7 @@ namespace ClinicManager.Services
         public VisitFormViewModel GetNewVisitFormViewModel()
         {
             var patients = _patientRepository.GetAllPatients();
-            var appointments = _appointmentRepository.GetAllAppointments();
+            var appointments = _appointmentRepository.GetTodaysAppointments();
             var doctors = _doctorRepository.GetAllDoctors();
             var viewModel = new VisitFormViewModel
             {
@@ -47,6 +47,11 @@ namespace ClinicManager.Services
                 Doctors = doctors
             };
             return viewModel;
+        }
+        public IEnumerable<Appointment> GetTodaysAppointments()
+        {
+            var appointments = _appointmentRepository.GetTodaysAppointments();
+            return appointments;
         }
         public void AddVisit(Visit visit)
         {

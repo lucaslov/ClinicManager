@@ -10,6 +10,7 @@ namespace ClinicManager.Repositories
     public interface IAppointmentRepository
     {
         IEnumerable<Appointment> GetAllAppointments();
+        IEnumerable<Appointment> GetTodaysAppointments();
         Appointment GetAppointment(int id);
         void DeleteAppointment(int id);
         void AddAppointment(Appointment appointment);

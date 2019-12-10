@@ -10,7 +10,6 @@ namespace ClinicManager.Models
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var _context = new ApplicationDbContext();
             var appointment = (Appointment)validationContext.ObjectInstance;
             var appointmentDate = appointment.Date;
            if(appointmentDate.DayOfWeek == DayOfWeek.Saturday 
